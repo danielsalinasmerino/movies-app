@@ -1,8 +1,9 @@
-import { Movie } from "@/context/movies/domain/Movie";
+import { Movie, Movies } from "@/context/movies/domain/Movie";
 import { MovieRepository } from "@/context/movies/domain/MovieRepository";
 import {
-  MovieResponse,
-  MovieResult,
-} from "@/context/movies/domain/MovieSearch";
+  MoviesSearchResponse,
+  MoviesSearchResponses,
+} from "@/context/movies/domain/MoviesSearchResponse";
 
-export type { Movie, MovieRepository, MovieResponse, MovieResult };
+export { Movies, MoviesSearchResponses };
+export type { Movie, MovieRepository, MoviesSearchResponse };

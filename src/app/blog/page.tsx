@@ -1,29 +1,10 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
+import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMovies } from "@/context/movies/application";
-import { MovieResult } from "@/context/movies/domain";
 import { useDebouncedValue } from "@/utils/hooks";
-
-const MovieTable = ({ results }: { results: Array<MovieResult> }) => (
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Original Title</th>
-      </tr>
-    </thead>
-    <tbody>
-      {results.map((result) => (
-        <tr key={result.id}>
-          <td>{result.title}</td>
-          <td>{result.original_title}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
 
 export default function Blog() {
   const [page, setPage] = useState(1);
@@ -34,6 +15,10 @@ export default function Blog() {
     query: debouncedQuery,
     page,
   });
+
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedQuery]);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) =>
     setQuery(event.target.value);
@@ -62,7 +47,7 @@ export default function Blog() {
         </div>
       )}
 
-      {data && <MovieTable results={data.results} />}
+      {data && <MovieList movies={data.movies} />}
 
       <div>
         <button onClick={handlePreviousPage} disabled={page === 1 || isLoading}>

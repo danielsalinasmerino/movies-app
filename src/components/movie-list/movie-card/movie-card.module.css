@@ -1,0 +1,53 @@
+.movieCard {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .movieCardImage {
+    position: relative;
+    width: 100%;
+    height: 450px;
+  }
+  
+  .movieCardPlaceholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #eaeaea;
+    color: #777;
+    font-size: 16px;
+  }
+  
+  .movieCardContent {
+    padding: 16px;
+  }
+  
+  .movieCardTitle {
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  
+  .movieCardReleaseDate {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 8px;
+  }
+  
+  .movieCardOverview {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+  }
+  
