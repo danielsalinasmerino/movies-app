@@ -1,18 +1,20 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMovies } from "@/context/movies/application";
+import { useSearchContext } from "@/contexts/search-context";
 import { useDebouncedValue } from "@/utils/hooks";
 
 export default function Search() {
+  const { searchValue } = useSearchContext();
+  const query = useDebouncedValue(searchValue, 300);
+
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const debouncedQuery = useDebouncedValue(query, 300);
 
   const { data, isError, isLoading, refetch } = useSearchMovies({
-    query: debouncedQuery,
+    query,
     page,
   });
 
@@ -20,27 +22,13 @@ export default function Search() {
 
   useEffect(() => {
     setPage(1);
-  }, [debouncedQuery]);
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setQuery(event.target.value);
+  }, [query]);
 
   const handlePageChange = (newPage: number) =>
     setPage(Math.min(Math.max(newPage, 1), maxPages));
 
   return (
     <div>
-      <div>
-        <input
-          type="text"
-          id="query"
-          name="query"
-          value={query}
-          onChange={handleInputChange}
-          placeholder="Search here..."
-        />
-      </div>
-
       {isLoading && <div>Loading...</div>}
 
       {isError && (
