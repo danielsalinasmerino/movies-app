@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 32px;
+    
+    height: 80px;
+    padding: 8px 24px;
+}
+
+.logo {
+    width: 240px;
+    height: auto;
+}
+
+.searcher {
+    width: 33%;
+    min-width: 200px;
+    height: 32px;
+    padding: 8px;
+  
+    border: none;
+    border-radius: 8px;
+    outline: 2px solid transparent;
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+  
+    outline-offset: 2px;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+
+
+.searcher:focus {
+    outline: 2px solid #000000; 
+}
