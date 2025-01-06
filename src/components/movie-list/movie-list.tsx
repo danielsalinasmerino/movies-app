@@ -1,6 +1,6 @@
 import React from "react";
 
-import MovieCard from "@/components/movie-list/movie-card/movie-card";
+import MovieListItem from "@/components/movie-list/movie-list-item/movie-list-item";
 import { Movie } from "@/context/movies/domain";
 
 import styles from "./movie-list.module.css";
@@ -13,13 +13,15 @@ const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
     <div className={styles.movieList}>
       {movies.map((movie) => (
-        <MovieCard
+        <MovieListItem
           key={movie.id}
           id={movie.id}
           title={movie.title}
-          releaseDate={movie.releaseDate}
-          overview={movie.overview}
+          releaseYear={movie.releaseYear}
           posterPath={movie.posterPath}
+          originalTitle={movie.originalTitle}
+          originalCountryCode={movie.originalCountryCode}
+          overview={movie.overview}
         />
       ))}
     </div>

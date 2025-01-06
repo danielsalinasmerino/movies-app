@@ -55,8 +55,10 @@ export default function RootLayout({
       >
         <ReactQueryProvider>
           <SearchProvider>
-            <Header />
-            {children}
+            <div className="layout">
+              <Header />
+              {children}
+            </div>
           </SearchProvider>
         </ReactQueryProvider>
       </body>
