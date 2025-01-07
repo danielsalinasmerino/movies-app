@@ -57,9 +57,12 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
       <div className={styles.content}>
         <div className={styles.mainInfo}>
           <h2 className={styles.title}>
-            {title} {releaseYear ? `- ${releaseYear}` : ""}
+            {title}{" "}
+            <span className={styles.releaseYear}>
+              {releaseYear ?? releaseYear}
+            </span>
           </h2>
-          <p className={styles.releaseYear}>
+          <p>
             Original title: {originalTitle}{" "}
             {originalCountryCode && (
               <span className={`fi fi-${originalCountryCode}`}></span>

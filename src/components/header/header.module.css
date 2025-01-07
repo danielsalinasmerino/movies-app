@@ -7,6 +7,8 @@
     
     height: 80px;
     padding: 8px 0px;
+
+    background-color: var(--dark-blue);
 }
 
 .logo {

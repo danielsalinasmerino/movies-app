@@ -14,6 +14,8 @@ import "./reset.css";
 // TODO: Change favicon
 // TODO: Add a i18n service for texts
 // TODO: Atomic components ?
+// TODO: Responsive!
+// TODO: Tests!
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,10 +57,8 @@ export default function RootLayout({
       >
         <ReactQueryProvider>
           <SearchProvider>
-            <div className="layout">
-              <Header />
-              {children}
-            </div>
+            <Header />
+            {children}
           </SearchProvider>
         </ReactQueryProvider>
       </body>
