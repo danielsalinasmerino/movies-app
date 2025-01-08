@@ -59,7 +59,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
           <h2 className={styles.title}>
             {title}{" "}
             <span className={styles.releaseYear}>
-              {releaseYear ?? releaseYear}
+              {releaseYear ? releaseYear.toString() : ""}
             </span>
           </h2>
           <p>

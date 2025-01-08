@@ -40,7 +40,7 @@ export default function Home() {
 
       {data && (
         <>
-          <MovieList movies={data.movies} />
+          <MovieList movies={data.movies} query={query} />
           <div>
             <p>
               Page {page} of {maxPages}
