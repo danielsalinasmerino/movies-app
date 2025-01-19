@@ -3,17 +3,20 @@
 import Image from "next/image";
 import React, { ChangeEvent } from "react";
 
-import { useSearchContext } from "@/contexts/search-context";
+import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
+import { setSearchValue } from "@/utils/react-redux/features/searchSlice";
 
 import styles from "./header.module.css";
 
 const LOGO_PATH = `/images/logos/alt_short_blue.svg`;
 
 const Header = () => {
-  const { searchValue, setSearchValue } = useSearchContext();
+  const dispatch = useAppDispatch();
+
+  const searchValue = useAppSelector((state) => state.search.value);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setSearchValue && setSearchValue(event.target.value);
+    dispatch(setSearchValue(event.target.value));
 
   return (
     <header>

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Header from "@/components/header/header";
-import { SearchProvider } from "@/contexts/search-context";
 import { ReactQueryProvider } from "@/utils/react-query";
+import { ReactReduxProvider } from "@/utils/react-redux";
 
 import "./globals.css";
 import "./reset.css";
@@ -55,12 +55,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <SearchProvider>
+        <ReactReduxProvider>
+          <ReactQueryProvider>
             <Header />
             {children}
-          </SearchProvider>
-        </ReactQueryProvider>
+          </ReactQueryProvider>
+        </ReactReduxProvider>
       </body>
     </html>
   );

@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMovies } from "@/context/movies/application";
-import { useSearchContext } from "@/contexts/search-context";
 import { useDebouncedValue } from "@/utils/hooks";
+import { useAppSelector } from "@/utils/react-redux";
 
 export default function Home() {
-  const { searchValue } = useSearchContext();
+  const searchValue = useAppSelector((state) => state.search.value);
+
   const query = useDebouncedValue(searchValue, 300);
 
   const [page, setPage] = useState(1);
