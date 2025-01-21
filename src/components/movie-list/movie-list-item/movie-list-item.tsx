@@ -2,6 +2,9 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import "flag-icons/css/flag-icons.min.css";
 
+import { useGetMovieCredits } from "@/context/movies/application";
+import { MovieCreditsTools } from "@/context/movies/domain";
+
 import styles from "./movie-list-item.module.css";
 
 interface MovieListItemProps {
@@ -25,6 +28,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   overview,
   posterPath,
 }) => {
+  const { data: movieCredits } = useGetMovieCredits({ movie_id: id });
+
   const posterSrc = useMemo(
     () => (posterPath ? `${BASE_IMAGES_TMDB_URL}${posterPath}` : ""),
     [posterPath]
@@ -70,6 +75,14 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
           </p>
         </div>
         <p className={styles.overview}>{overview}</p>
+        {movieCredits && (
+          <p>
+            Director:{" "}
+            {MovieCreditsTools.getDirectors(movieCredits)
+              .map((director) => director.name)
+              .join(", ")}
+          </p>
+        )}
       </div>
     </div>
   );

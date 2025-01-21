@@ -1,13 +1,25 @@
 import {
   Movie,
+  MovieCredits,
   MovieRepository,
   MoviesSearchResponse,
 } from "@/context/movies/domain";
 import { axiosTMDBClient, handleAxiosError } from "@/utils/axios";
 
-import { mapMovie, mapMoviesSearchResponse } from "./mappers";
+import { mapMovie, mapMovieCredits, mapMoviesSearchResponse } from "./mappers";
 
 export const MovieRestRepository: MovieRepository = {
+  getCredits: async (movie_id: number): Promise<MovieCredits> => {
+    try {
+      const { data } = await axiosTMDBClient.get(`/movie/${movie_id}/credits`);
+
+      return mapMovieCredits(data);
+    } catch (error) {
+      handleAxiosError(error, `Fetching movie credits for ID ${movie_id}`);
+      throw new Error("Unable to fetch movie credits");
+    }
+  },
+
   getDetails: async (movie_id: number): Promise<Movie> => {
     try {
       const { data } = await axiosTMDBClient.get(`/movie/${movie_id}`);
