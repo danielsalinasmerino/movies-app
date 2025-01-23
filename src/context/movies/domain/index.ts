@@ -8,6 +8,16 @@ import {
   MoviesSearchResponse,
   MoviesSearchResponses,
 } from "@/context/movies/domain/MoviesSearchResponse";
+import {
+  MovieWithCredits,
+  MoviesWithCredits,
+} from "@/context/movies/domain/MovieWithCredits";
 
-export { MovieCreditsTools, Movies, MoviesSearchResponses };
-export type { Movie, MovieCredits, MovieRepository, MoviesSearchResponse };
+export { MovieCreditsTools, Movies, MoviesSearchResponses, MoviesWithCredits };
+export type {
+  Movie,
+  MovieCredits,
+  MovieRepository,
+  MoviesSearchResponse,
+  MovieWithCredits,
+};

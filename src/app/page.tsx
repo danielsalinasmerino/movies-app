@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
-import { useSearchMovies } from "@/context/movies/application";
+import { useSearchMoviesWithCredits } from "@/context/movies/application";
 import { useDebouncedValue } from "@/utils/hooks";
 import { useAppSelector } from "@/utils/react-redux";
 
@@ -14,7 +14,7 @@ export default function Home() {
 
   const [page, setPage] = useState(1);
 
-  const { data, isError, isLoading, refetch } = useSearchMovies({
+  const { data, isError, isLoading, refetch } = useSearchMoviesWithCredits({
     query,
     page,
   });

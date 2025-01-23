@@ -1,4 +1,3 @@
-import { useGetMovieCredits } from "@/context/movies/application/use-get-movie-credits";
-import { useSearchMovies } from "@/context/movies/application/use-search-movies";
+import { useSearchMoviesWithCredits } from "@/context/movies/application/use-search-movies-with-credits";
 
-export { useGetMovieCredits, useSearchMovies };
+export { useSearchMoviesWithCredits };

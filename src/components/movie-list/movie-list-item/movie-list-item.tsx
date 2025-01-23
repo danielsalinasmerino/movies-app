@@ -2,8 +2,7 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import "flag-icons/css/flag-icons.min.css";
 
-import { useGetMovieCredits } from "@/context/movies/application";
-import { MovieCreditsTools } from "@/context/movies/domain";
+import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
 
 import styles from "./movie-list-item.module.css";
 
@@ -15,6 +14,7 @@ interface MovieListItemProps {
   releaseYear?: number;
   overview: string;
   posterPath?: string;
+  credits?: MovieCredits;
 }
 
 const BASE_IMAGES_TMDB_URL = "https://image.tmdb.org/t/p/w500";
@@ -27,9 +27,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   releaseYear,
   overview,
   posterPath,
+  credits,
 }) => {
-  const { data: movieCredits } = useGetMovieCredits({ movie_id: id });
-
   const posterSrc = useMemo(
     () => (posterPath ? `${BASE_IMAGES_TMDB_URL}${posterPath}` : ""),
     [posterPath]
@@ -75,10 +74,10 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
           </p>
         </div>
         <p className={styles.overview}>{overview}</p>
-        {movieCredits && (
+        {credits && (
           <p>
             Director:{" "}
-            {MovieCreditsTools.getDirectors(movieCredits)
+            {MovieCreditsTools.getDirectors(credits)
               .map((director) => director.name)
               .join(", ")}
           </p>

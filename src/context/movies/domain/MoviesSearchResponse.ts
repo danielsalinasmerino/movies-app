@@ -1,9 +1,9 @@
-import { Movie } from "@/context/movies/domain";
+import { MovieWithCredits } from "@/context/movies/domain";
 
 // TODO: Maybe delete this and create kind of a "searchResponse" general, using <T>
 export interface MoviesSearchResponse {
   page: number;
-  movies: Array<Movie>;
+  movies: Array<MovieWithCredits>;
   totalPages: number;
   totalResults: number;
 }
