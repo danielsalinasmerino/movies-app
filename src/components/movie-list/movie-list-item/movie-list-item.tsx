@@ -67,7 +67,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
             </span>
           </h2>
           <p>
-            Original title: {originalTitle}{" "}
+            {originalTitle}{" "}
             {originalCountryCode && (
               <span className={`fi fi-${originalCountryCode}`}></span>
             )}
@@ -76,7 +76,6 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
         <p className={styles.overview}>{overview}</p>
         {credits && (
           <p>
-            Director:{" "}
             {MovieCreditsTools.getDirectors(credits)
               .map((director) => director.name)
               .join(", ")}

@@ -1,9 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import searchReducer from "@/utils/react-redux/features/searchSlice";
+import moviesSearchReducer from "@/utils/react-redux/features/moviesSearchSlice";
 
 const rootReducer = combineReducers({
-  search: searchReducer,
+  moviesSearch: moviesSearchReducer,
 });
 
 export default rootReducer;

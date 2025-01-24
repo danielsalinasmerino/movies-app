@@ -5,10 +5,13 @@ import { useEffect, useState } from "react";
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMoviesWithCredits } from "@/context/movies/application";
 import { useDebouncedValue } from "@/utils/hooks";
-import { useAppSelector } from "@/utils/react-redux";
+import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
+import { setIsLoading } from "@/utils/react-redux/features/moviesSearchSlice";
 
 export default function Home() {
-  const searchValue = useAppSelector((state) => state.search.value);
+  const dispatch = useAppDispatch();
+
+  const searchValue = useAppSelector((state) => state.moviesSearch.searchValue);
 
   const query = useDebouncedValue(searchValue, 300);
 
@@ -28,10 +31,12 @@ export default function Home() {
   const handlePageChange = (newPage: number) =>
     setPage(Math.min(Math.max(newPage, 1), maxPages));
 
+  useEffect(() => {
+    dispatch(setIsLoading(isLoading));
+  }, [dispatch, isLoading]);
+
   return (
     <div>
-      {isLoading && <div>Loading...</div>}
-
       {isError && (
         <div>
           <p>Error fetching data. Please try again later.</p>
