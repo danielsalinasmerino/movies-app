@@ -35,8 +35,6 @@
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-
-
 .searcher:focus {
     outline: 2px solid #000000; 
 }

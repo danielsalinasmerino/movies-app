@@ -8,6 +8,8 @@ import { useDebouncedValue } from "@/utils/hooks";
 import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
 import { setIsLoading } from "@/utils/react-redux/features/moviesSearchSlice";
 
+import styles from "./page.module.css";
+
 export default function Home() {
   const dispatch = useAppDispatch();
 
@@ -36,7 +38,7 @@ export default function Home() {
   }, [dispatch, isLoading]);
 
   return (
-    <div>
+    <div className={styles.page}>
       {isError && (
         <div>
           <p>Error fetching data. Please try again later.</p>

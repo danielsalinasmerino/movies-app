@@ -3,9 +3,6 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
-  padding: 24px 320px;
-
-  background-color: var(--dark-blue-tint-2);
 }
 
 .movieList > * {
