@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMoviesWithCredits } from "@/context/movies/application";
@@ -26,16 +26,18 @@ export default function Home() {
 
   const maxPages = data?.totalPages || 1;
 
-  useEffect(() => {
-    setPage(1);
-  }, [query]);
-
   const handlePageChange = (newPage: number) =>
     setPage(Math.min(Math.max(newPage, 1), maxPages));
 
   useEffect(() => {
+    setPage(1);
+  }, [query]);
+
+  useEffect(() => {
     dispatch(setIsLoading(isLoading));
   }, [dispatch, isLoading]);
+
+  const movies = useMemo(() => (data ? data.movies : []), [data]);
 
   return (
     <div className={styles.page}>
@@ -46,42 +48,40 @@ export default function Home() {
         </div>
       )}
 
-      {data && (
-        <>
-          <MovieList movies={data.movies} query={query} />
+      <>
+        <MovieList movies={movies} query={query} />
+        <div>
+          <p>
+            Page {page} of {maxPages}
+          </p>
           <div>
-            <p>
-              Page {page} of {maxPages}
-            </p>
-            <div>
-              <button
-                onClick={() => handlePageChange(1)}
-                disabled={page === 1 || isLoading}
-              >
-                First
-              </button>
-              <button
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1 || isLoading}
-              >
-                Previous
-              </button>
-              <button
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === maxPages || isLoading}
-              >
-                Next
-              </button>
-              <button
-                onClick={() => handlePageChange(maxPages)}
-                disabled={page === maxPages || isLoading}
-              >
-                Last
-              </button>
-            </div>
+            <button
+              onClick={() => handlePageChange(1)}
+              disabled={page === 1 || isLoading}
+            >
+              First
+            </button>
+            <button
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1 || isLoading}
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === maxPages || isLoading}
+            >
+              Next
+            </button>
+            <button
+              onClick={() => handlePageChange(maxPages)}
+              disabled={page === maxPages || isLoading}
+            >
+              Last
+            </button>
           </div>
-        </>
-      )}
+        </div>
+      </>
     </div>
   );
 }

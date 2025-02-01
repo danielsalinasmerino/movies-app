@@ -13,9 +13,11 @@ interface MovieListProps {
 const MovieList: React.FC<MovieListProps> = ({ movies, query }) => {
   return (
     <div className={styles.movieList}>
-      <div className={styles.movieListHeader}>
-        {`Showing results for "${query}"`.toLocaleUpperCase()}
-      </div>
+      {query && (
+        <div className={styles.movieListHeader}>
+          {`Showing results for "${query}"`.toLocaleUpperCase()}
+        </div>
+      )}
       {movies.map((movie) => (
         <MovieListItem
           key={movie.id}
