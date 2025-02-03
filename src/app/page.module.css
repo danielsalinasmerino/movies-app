@@ -5,3 +5,10 @@
 
   background-color: var(--dark-blue-tint-2);
 }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 16px 32px;
+}

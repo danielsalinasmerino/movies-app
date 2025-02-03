@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import isEqual from "lodash/isEqual";
+import { useEffect, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMoviesWithCredits } from "@/context/movies/application";
+import { MovieWithCredits } from "@/context/movies/domain";
 import { useDebouncedValue } from "@/utils/hooks";
 import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
 import { setIsLoading } from "@/utils/react-redux/features/moviesSearchSlice";
@@ -18,6 +20,7 @@ export default function Home() {
   const query = useDebouncedValue(searchValue, 300);
 
   const [page, setPage] = useState(1);
+  const [cachedMovies, setCachedMovies] = useState<Array<MovieWithCredits>>([]);
 
   const { data, isError, isLoading, refetch } = useSearchMoviesWithCredits({
     query,
@@ -37,7 +40,11 @@ export default function Home() {
     dispatch(setIsLoading(isLoading));
   }, [dispatch, isLoading]);
 
-  const movies = useMemo(() => (data ? data.movies : []), [data]);
+  useEffect(() => {
+    if (data?.movies && !isEqual(data.movies, cachedMovies)) {
+      setCachedMovies(data.movies);
+    }
+  }, [cachedMovies, data, setCachedMovies]);
 
   return (
     <div className={styles.page}>
@@ -49,12 +56,9 @@ export default function Home() {
       )}
 
       <>
-        <MovieList movies={movies} query={query} />
-        <div>
-          <p>
-            Page {page} of {maxPages}
-          </p>
-          <div>
+        <MovieList movies={cachedMovies} query={query} />
+        {!!cachedMovies.length && (
+          <div className={styles.pager}>
             <button
               onClick={() => handlePageChange(1)}
               disabled={page === 1 || isLoading}
@@ -80,7 +84,7 @@ export default function Home() {
               Last
             </button>
           </div>
-        </div>
+        )}
       </>
     </div>
   );
