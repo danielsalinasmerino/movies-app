@@ -12,7 +12,8 @@ interface MovieListItemProps {
   originalTitle: string;
   originalCountryCode: string;
   releaseYear?: number;
-  overview: string;
+  voteAverage: number;
+  voteCount: number;
   posterPath?: string;
   credits?: MovieCredits;
 }
@@ -25,7 +26,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   originalTitle,
   originalCountryCode,
   releaseYear,
-  overview,
+  voteAverage,
+  voteCount,
   posterPath,
   credits,
 }) => {
@@ -73,13 +75,17 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
             )}
           </p>
         </div>
-        <p className={styles.overview}>{overview}</p>
+        <p className={styles.overview}>{`${
+          Math.round(voteAverage * 10) / 10
+        } - ${voteCount}`}</p>
         {credits && (
-          <p>
-            {MovieCreditsTools.getDirectors(credits)
-              .map((director) => director.name)
-              .join(", ")}
-          </p>
+          <div className={styles.directors}>
+            {MovieCreditsTools.getDirectors(credits).map((director) => (
+              <div className={styles.directorName} key={director.id}>
+                {director.name}
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

@@ -11,25 +11,23 @@ interface MovieListProps {
 }
 
 const MovieList: React.FC<MovieListProps> = ({ movies, query }) => {
+  const renderResultsMessage = () => {
+    if (!query) return null;
+
+    const message = movies.length
+      ? `Showing results for "${query}"`
+      : `No results found for "${query}"`;
+
+    return (
+      <div className={styles.movieListHeader}>{message.toUpperCase()}</div>
+    );
+  };
+
   return (
     <div className={styles.movieList}>
-      {query && (
-        <div className={styles.movieListHeader}>
-          {`Showing results for "${query}"`.toLocaleUpperCase()}
-        </div>
-      )}
+      {renderResultsMessage()}
       {movies.map((movie) => (
-        <MovieListItem
-          key={movie.id}
-          id={movie.id}
-          title={movie.title}
-          releaseYear={movie.releaseYear}
-          posterPath={movie.posterPath}
-          originalTitle={movie.originalTitle}
-          originalCountryCode={movie.originalCountryCode}
-          overview={movie.overview}
-          credits={movie.credits}
-        />
+        <MovieListItem key={movie.id} {...movie} />
       ))}
     </div>
   );
