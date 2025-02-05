@@ -1,14 +1,12 @@
 .page {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   width: 100%;
-  padding: 24px 320px;
-
+  padding: 24px 5vw;
   background-color: var(--dark-blue-tint-2);
 }
 
 .pager {
   display: flex;
   justify-content: space-between;
-
-  padding: 16px 32px;
+  padding: 16px 0;
 }
