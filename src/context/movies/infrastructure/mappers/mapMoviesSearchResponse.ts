@@ -8,10 +8,18 @@ import { mapMovie } from "./mapMovie";
 // TODO: Do not use any
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mapMoviesSearchResponse = (data: any): MoviesSearchResponse => {
-  return MoviesSearchResponses.create({
+  const moviesSearchResponse = MoviesSearchResponses.create({
     page: data.page ?? 0,
     movies: data.results.map(mapMovie),
     totalPages: data.total_pages ?? 0,
     totalResults: data.total_results ?? 0,
   });
+
+  const { movies } = moviesSearchResponse;
+
+  const moviesOrdered = [...movies].sort(
+    ({ voteCount: a }, { voteCount: b }) => b - a
+  );
+
+  return { ...moviesSearchResponse, movies: moviesOrdered };
 };
