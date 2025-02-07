@@ -1,6 +1,5 @@
 "use client";
 
-import isEqual from "lodash/isEqual";
 import { useEffect, useState } from "react";
 
 import MovieList from "@/components/movie-list/movie-list";
@@ -52,16 +51,27 @@ export default function Search() {
     if (!data?.movies) return;
 
     setCachedMovies((prev) => {
-      const cachedIds = new Set(prev.map((m) => m.id));
-      const newMovies = data.movies.filter((m) => !cachedIds.has(m.id));
+      const cachedMap = new Map(prev.map((movie) => [movie.id, movie]));
+      let hasChanges = false;
 
-      if (newMovies.length === 0 || isEqual(prev, [...prev, ...newMovies])) {
-        return prev;
-      }
+      const updatedMovies = [...prev];
 
-      return [...prev, ...newMovies];
+      data.movies.forEach((movie) => {
+        const existingMovie = cachedMap.get(movie.id);
+
+        if (!existingMovie) {
+          updatedMovies.push({ ...movie, credits: movie.credits || undefined });
+          hasChanges = true;
+        } else if (!existingMovie.credits && movie.credits) {
+          const index = updatedMovies.findIndex((m) => m.id === movie.id);
+          updatedMovies[index] = { ...existingMovie, credits: movie.credits };
+          hasChanges = true;
+        }
+      });
+
+      return hasChanges ? updatedMovies : prev;
     });
-  }, [data]);
+  }, [data?.movies]);
 
   return (
     <div className={styles.page}>

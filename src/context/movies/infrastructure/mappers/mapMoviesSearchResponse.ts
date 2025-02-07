@@ -15,11 +15,5 @@ export const mapMoviesSearchResponse = (data: any): MoviesSearchResponse => {
     totalResults: data.total_results ?? 0,
   });
 
-  const { movies } = moviesSearchResponse;
-
-  const moviesOrdered = [...movies].sort(
-    ({ voteCount: a }, { voteCount: b }) => b - a
-  );
-
-  return { ...moviesSearchResponse, movies: moviesOrdered };
+  return moviesSearchResponse;
 };
