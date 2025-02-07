@@ -24,47 +24,48 @@ export function useSearchMoviesWithCredits({
       searchMoviesQuery.data?.movies.map((movie) => ({
         queryKey: ["getMovieCredits", { movie_id: movie.id }],
         queryFn: () => MovieRestRepository.getCredits(movie.id),
-        enabled: !!searchMoviesQuery.data,
+        enabled: searchMoviesQuery.data?.movies.length > 0,
       })) || [],
   });
+
+  const isLoading =
+    searchMoviesQuery.isLoading ||
+    (movieCreditsQueries.length > 0 &&
+      movieCreditsQueries.some((query) => query.isLoading));
+
+  const isFetching =
+    searchMoviesQuery.isFetching ||
+    movieCreditsQueries.some((query) => query.isFetching);
+
+  const isError =
+    searchMoviesQuery.isError ||
+    movieCreditsQueries.some((query) => query.isError);
 
   const data: MoviesSearchResponse | undefined = useMemo(() => {
     if (!searchMoviesQuery.data) return undefined;
 
     const creditsMap = movieCreditsQueries.reduce<Record<number, MovieCredits>>(
       (acc, query) => {
-        if (query.data) {
-          acc[query.data.id] = query.data;
-        }
+        if (query.data) acc[query.data.id] = query.data;
         return acc;
       },
       {}
     );
 
-    const moviesWithCredits = searchMoviesQuery.data.movies.map((movie) => ({
-      ...movie,
-      credits: creditsMap[movie.id] || null,
-    }));
-
     return {
       ...searchMoviesQuery.data,
-      movies: moviesWithCredits,
+      movies: searchMoviesQuery.data.movies.map((movie) => ({
+        ...movie,
+        credits: creditsMap[movie.id] || null,
+      })),
     };
   }, [searchMoviesQuery.data, movieCreditsQueries]);
 
-  const isLoading =
-    searchMoviesQuery.isLoading ||
-    movieCreditsQueries.some((query) => query.isLoading);
-
-  const isError =
-    searchMoviesQuery.isError ||
-    movieCreditsQueries.some((query) => query.isError);
-
   return {
     data,
-    isError,
     isLoading,
-    isFetching: searchMoviesQuery.isFetching,
+    isFetching,
+    isError,
     refetch: searchMoviesQuery.refetch,
   };
 }
