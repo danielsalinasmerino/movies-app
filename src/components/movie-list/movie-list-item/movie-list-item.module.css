@@ -68,14 +68,3 @@
   display: flex;
   gap: 8px;
 }
-
-.directorName {
-  padding: 4px 8px;
-  background-color: var(--dark-blue-tint-3);
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.directorName:hover {
-  color: var(--dark-blue-tint-9);
-}

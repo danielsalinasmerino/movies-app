@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import Button from "@/components/button/button";
 import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMoviesWithCredits } from "@/context/movies/application";
 import { MovieWithCredits } from "@/context/movies/domain";
@@ -85,13 +86,12 @@ export default function Search() {
       <div className={styles.list}>
         <MovieList movies={cachedMovies} query={query} />
         {!!cachedMovies.length && (
-          <div>
-            <button
+          <div className={styles.showMore}>
+            <Button
+              label={"Show more results"}
               onClick={() => handlePageChange(page + 1)}
               disabled={isLoading}
-            >
-              Show more
-            </button>
+            />
           </div>
         )}
       </div>

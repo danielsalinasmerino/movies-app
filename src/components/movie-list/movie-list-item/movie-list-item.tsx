@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import "flag-icons/css/flag-icons.min.css";
 
+import Button from "@/components/button/button";
 import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
 
 import styles from "./movie-list-item.module.css";
@@ -81,9 +82,7 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
         {credits && (
           <div className={styles.directors}>
             {MovieCreditsTools.getDirectors(credits).map((director) => (
-              <div className={styles.directorName} key={director.id}>
-                {director.name}
-              </div>
+              <Button key={director.id} label={director.name} />
             ))}
           </div>
         )}
