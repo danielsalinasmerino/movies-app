@@ -91,6 +91,7 @@ export default function Search() {
               label={"Show more results"}
               onClick={() => handlePageChange(page + 1)}
               disabled={isLoading}
+              size="large"
             />
           </div>
         )}

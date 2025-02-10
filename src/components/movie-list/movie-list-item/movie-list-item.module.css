@@ -12,7 +12,7 @@
   height: 150px;
   object-fit: cover;
   border-radius: 4px;
-  border: 1px solid var(--dark-blue);
+  border: 1px solid var(--dark-blue-shade-5);
   background-color: #f9f9f9;
 }
 
@@ -27,7 +27,7 @@
   font-size: 16px;
   font-weight: 500;
   border-radius: 4px;
-  border: 1px solid var(--dark-blue);
+  border: 1px solid var(--dark-blue-shade-5);
   text-align: center;
 }
 

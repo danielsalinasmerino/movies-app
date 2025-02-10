@@ -12,30 +12,25 @@
 }
 
 .button.primary {
-  background-color: var(--blue);
-  color: white;
+  color: var(--dark-blue-tint-8);
+  background-color: var(--dark-blue-tint-3);
 }
 
 .button.primary:hover {
-  background-color: var(--blue-dark);
+  color: var(--dark-blue-tint-9);
+  background-color: var(--dark-blue-tint-4);
 }
 
 .button.secondary {
-  background-color: var(--gray-light);
-  color: var(--dark-blue);
 }
 
 .button.secondary:hover {
-  background-color: var(--gray);
 }
 
 .button.danger {
-  background-color: var(--red);
-  color: white;
 }
 
 .button.danger:hover {
-  background-color: var(--red-dark);
 }
 
 .button.small {
@@ -55,8 +50,8 @@
 
 .button.disabled,
 .button:disabled {
-  background-color: var(--gray);
-  color: var(--dark-gray);
+  color: var(--dark-blue);
+  background-color: var(--dark-blue-tint-1);
   cursor: not-allowed;
   pointer-events: none;
 }
