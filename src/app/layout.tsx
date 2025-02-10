@@ -9,7 +9,6 @@ import "./globals.css";
 import "./reset.css";
 
 // TODO: Add dependabot https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
-// TODO: Add README.md
 // TODO: Improve this layout.tsx
 // TODO: Change favicon
 // TODO: Add a i18n service for texts
