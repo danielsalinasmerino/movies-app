@@ -14,7 +14,6 @@ import "./reset.css";
 // TODO: Add a i18n service for texts
 // TODO: Atomic components ?
 // TODO: Responsive!
-// TODO: Tests!
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
