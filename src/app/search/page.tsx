@@ -74,6 +74,8 @@ export default function Search() {
     });
   }, [data?.movies]);
 
+  const showMoreResults = !!cachedMovies.length && page !== maxPages;
+
   return (
     <div className={styles.page}>
       {isError && (
@@ -85,7 +87,7 @@ export default function Search() {
 
       <div className={styles.list}>
         <MovieList movies={cachedMovies} query={query} />
-        {!!cachedMovies.length && (
+        {showMoreResults && (
           <div className={styles.showMore}>
             <Button
               label={"Show more results"}
