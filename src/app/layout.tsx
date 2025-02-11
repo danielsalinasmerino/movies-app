@@ -11,7 +11,6 @@ import "./reset.css";
 // TODO: Add dependabot https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
 // TODO: Improve this layout.tsx
 // TODO: Change favicon
-// TODO: Add a i18n service for texts
 // TODO: Atomic components ?
 // TODO: Responsive!
 
