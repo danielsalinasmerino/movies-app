@@ -3,7 +3,7 @@ import React from "react";
 
 import Button from "./button";
 
-describe("Button", () => {
+describe("Button Component", () => {
   test("renders the button with the correct label", () => {
     render(<Button label="Click me" />);
     expect(
