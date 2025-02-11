@@ -6,6 +6,15 @@ i18next.init({
   resources: {
     en: {
       translation: {
+        component: {
+          header: {
+            placeholder: "Search",
+          },
+          movieList: {
+            showingResults: `Showing results for "{{query}}"`,
+            noResultsFound: `No results found for "{{query}}"`,
+          },
+        },
         page: {
           search: {
             showMoreResults: "Show more results",

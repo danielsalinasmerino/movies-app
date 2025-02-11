@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { ChangeEvent, useMemo } from "react";
 
 import Loader from "@/components/loader/loader";
+import { useI18Translation } from "@/utils/i18next";
 import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
 import { setSearchValue } from "@/utils/react-redux/features/moviesSearchSlice";
 
@@ -19,6 +20,8 @@ const Header = () => {
     (state) => state.moviesSearch.isLoading
   );
   const searchValue = useAppSelector((state) => state.moviesSearch.searchValue);
+
+  const translate = useI18Translation("component.header");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
     dispatch(setSearchValue(event.target.value));
@@ -45,7 +48,7 @@ const Header = () => {
           name="searchValue"
           value={searchValue}
           onChange={handleInputChange}
-          placeholder="Search"
+          placeholder={translate("placeholder")}
           className={styles.searcher}
         />
         <div style={loaderContainerStyle}>
