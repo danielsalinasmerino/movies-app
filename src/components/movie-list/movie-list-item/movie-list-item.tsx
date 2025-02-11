@@ -1,9 +1,10 @@
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React from "react";
 import "flag-icons/css/flag-icons.min.css";
 
 import Button from "@/components/button/button";
 import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
+import { useI18Translation } from "@/utils/i18next";
 
 import styles from "./movie-list-item.module.css";
 
@@ -32,12 +33,26 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   posterPath,
   credits,
 }) => {
-  const posterSrc = useMemo(
-    () => (posterPath ? `${BASE_IMAGES_TMDB_URL}${posterPath}` : ""),
-    [posterPath]
-  );
+  const translate = useI18Translation("component.movieList.movieListItem");
 
-  const posterAlt = useMemo(() => `${title} Poster`, [title]);
+  const renderPoster = () =>
+    posterPath ? (
+      <Image
+        src={`${BASE_IMAGES_TMDB_URL}${posterPath}`}
+        alt={`${title} Poster`}
+        width={100}
+        height={150}
+        className={styles.image}
+        loading="lazy"
+      />
+    ) : (
+      <div className={styles.imagePlaceholder} aria-hidden="true">
+        {translate("noImageAvailable")}
+      </div>
+    );
+
+  const renderRating = () =>
+    `${Math.round(voteAverage * 10) / 10} - ${voteCount}`;
 
   return (
     <div
@@ -45,40 +60,23 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
       data-testid={`movie-item-${id}`}
       data-movie-id={id}
     >
-      <div>
-        {posterPath ? (
-          <Image
-            src={posterSrc}
-            alt={posterAlt}
-            width={100}
-            height={150}
-            className={styles.image}
-            loading="lazy"
-          />
-        ) : (
-          <div className={styles.imagePlaceholder} aria-hidden="true">
-            No Image Available
-          </div>
-        )}
-      </div>
+      <div>{renderPoster()}</div>
       <div className={styles.content}>
         <div className={styles.mainInfo}>
           <h2 className={styles.title}>
             {title}{" "}
-            <span className={styles.releaseYear}>
-              {releaseYear ? releaseYear.toString() : ""}
-            </span>
+            {releaseYear && (
+              <span className={styles.releaseYear}>{releaseYear}</span>
+            )}
           </h2>
           <p>
             {originalTitle}{" "}
             {originalCountryCode && (
-              <span className={`fi fi-${originalCountryCode}`}></span>
+              <span className={`fi fi-${originalCountryCode}`} />
             )}
           </p>
         </div>
-        <p className={styles.overview}>{`${
-          Math.round(voteAverage * 10) / 10
-        } - ${voteCount}`}</p>
+        <p className={styles.overview}>{renderRating()}</p>
         {credits && (
           <div className={styles.directors}>
             {MovieCreditsTools.getDirectors(credits).map((director) => (

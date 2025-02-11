@@ -13,6 +13,9 @@ i18next.init({
           movieList: {
             showingResults: `Showing results for "{{query}}"`,
             noResultsFound: `No results found for "{{query}}"`,
+            movieListItem: {
+              noImageAvailable: "No Image Available",
+            },
           },
         },
         page: {
