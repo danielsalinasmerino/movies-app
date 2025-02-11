@@ -7,6 +7,7 @@ import MovieList from "@/components/movie-list/movie-list";
 import { useSearchMoviesWithCredits } from "@/context/movies/application";
 import { MovieWithCredits } from "@/context/movies/domain";
 import { useDebouncedValue } from "@/utils/hooks";
+import { useI18Translation } from "@/utils/i18next";
 import { useAppDispatch, useAppSelector } from "@/utils/react-redux";
 import { setIsLoading } from "@/utils/react-redux/features/moviesSearchSlice";
 
@@ -18,6 +19,8 @@ export default function Search() {
   const searchValue = useAppSelector((state) => state.moviesSearch.searchValue);
 
   const query = useDebouncedValue(searchValue, 300);
+
+  const translate = useI18Translation("page.search");
 
   const [cachedMovies, setCachedMovies] = useState<Array<MovieWithCredits>>([]);
   const [lastQuery, setLastQuery] = useState<string>("");
@@ -90,7 +93,7 @@ export default function Search() {
         {showMoreResults && (
           <div className={styles.showMore}>
             <Button
-              label={"Show more results"}
+              label={translate("showMoreResults")}
               onClick={() => handlePageChange(page + 1)}
               disabled={isLoading}
               size="large"
