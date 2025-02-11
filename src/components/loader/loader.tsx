@@ -15,7 +15,9 @@ const Loader: React.FC<LoaderProps> = ({ size = 50, color = "#01b4e4" }) => {
     borderTop: `${size / 10}px solid transparent`,
   };
 
-  return <div style={loaderStyle} className={styles.loader} />;
+  return (
+    <div data-testid="loader" style={loaderStyle} className={styles.loader} />
+  );
 };
 
 export default Loader;

@@ -6,12 +6,6 @@ import Header from "@/components/header/header";
 import { setSearchValue } from "@/utils/react-redux/features/moviesSearchSlice";
 import "@testing-library/jest-dom";
 
-jest.mock("@/components/loader/loader", () => {
-  const MockLoader = () => <div data-testid="loader" />;
-  MockLoader.displayName = "MockLoader";
-  return MockLoader;
-});
-
 const mockStore = configureStore([]);
 
 describe("Header Component", () => {
