@@ -2,7 +2,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 
 import { MovieCredits, MoviesSearchResponse } from "@/context/movies/domain";
-import { MovieRestRepository } from "@/context/movies/infrastructure/movie-rest-repository";
+import { MoviesRestRepository } from "@/context/movies/infrastructure/movies-rest-repository";
 
 interface SearchMoviesUseCaseParams {
   query?: string;
@@ -15,7 +15,7 @@ export function useSearchMoviesWithCredits({
 }: SearchMoviesUseCaseParams) {
   const searchMoviesQuery = useQuery({
     queryKey: ["searchMovies", { query, page }],
-    queryFn: () => MovieRestRepository.search(query, page),
+    queryFn: () => MoviesRestRepository.search(query, page),
     enabled: !!query,
   });
 
@@ -23,7 +23,7 @@ export function useSearchMoviesWithCredits({
     queries:
       searchMoviesQuery.data?.movies.map((movie) => ({
         queryKey: ["getMovieCredits", { movie_id: movie.id }],
-        queryFn: () => MovieRestRepository.getCredits(movie.id),
+        queryFn: () => MoviesRestRepository.getCredits(movie.id),
         enabled: searchMoviesQuery.data?.movies.length > 0,
       })) || [],
   });

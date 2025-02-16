@@ -1,4 +1,4 @@
-import { Person } from "@/context/shared/domain";
+import { Person } from "@/context/persons/domain";
 
 export type CrewMember = Person & {
   creditId: string;

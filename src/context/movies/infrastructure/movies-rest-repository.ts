@@ -1,14 +1,14 @@
 import {
   Movie,
   MovieCredits,
-  MovieRepository,
+  MoviesRepository,
   MoviesSearchResponse,
 } from "@/context/movies/domain";
 import { axiosTMDBClient, handleAxiosError } from "@/utils/axios";
 
 import { mapMovie, mapMovieCredits, mapMoviesSearchResponse } from "./mappers";
 
-export const MovieRestRepository: MovieRepository = {
+export const MoviesRestRepository: MoviesRepository = {
   getCredits: async (movie_id: number): Promise<MovieCredits> => {
     try {
       const { data } = await axiosTMDBClient.get(`/movie/${movie_id}/credits`);

@@ -1,6 +1,7 @@
 import { Gender } from "@/context/persons/domain/Gender";
-import { Person } from "@/context/persons/domain/Person";
+import { Person, Persons } from "@/context/persons/domain/Person";
+import { PersonsRepository } from "@/context/persons/domain/PersonsRepository";
 
-export { Gender };
+export { Gender, Persons };
 
-export type { Person };
+export type { Person, PersonsRepository };
