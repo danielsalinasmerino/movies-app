@@ -1,16 +1,34 @@
 import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
-import { CastMember, CrewMember, Person } from "@/context/shared/domain";
+import { Gender, Person } from "@/context/persons/domain";
+import { CastMember, CrewMember } from "@/context/shared/domain";
+
+const mapGender = (data: number): Gender => {
+  const genderMap: Record<number, Gender> = {
+    1: Gender.FEMALE,
+    2: Gender.MALE,
+    3: Gender.NON_BINARY,
+  };
+
+  return genderMap[data] ?? Gender.NOT_SPECIFIED;
+};
 
 // TODO: This to proper file
 const mapPerson = (data: any): Person => ({
   adult: data.adult ?? true,
-  gender: data.gender ?? 0,
+  gender: mapGender(data.gender ?? 0),
   id: data.id ?? 0,
   knownForDepartment: data.known_for_department || "",
   name: data.name || "",
   originalName: data.original_name || "",
   popularity: data.popularity ?? 0,
   profilePath: data.profile_path || "",
+  alsoKnownAs: data.also_known_as || undefined,
+  biography: data.biography || undefined,
+  birthday: data.birthday || undefined,
+  deathday: data.deathday || undefined,
+  homepage: data.homepage || undefined,
+  imdbId: data.imdb_id || undefined,
+  placeOfBirth: data.place_of_birth || undefined,
 });
 
 // TODO: This to proper file
