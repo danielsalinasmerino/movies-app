@@ -1,10 +1,12 @@
 import Image from "next/image";
-import React from "react";
+import React, { useCallback } from "react";
 import "flag-icons/css/flag-icons.min.css";
 
 import Button from "@/components/button/button";
 import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
+import { routes } from "@/routes";
 import { useI18Translation } from "@/utils/i18next";
+import { useNavigate } from "@/utils/navigation";
 
 import styles from "./movie-list-item.module.css";
 
@@ -35,6 +37,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
 }) => {
   const translate = useI18Translation("component.movieList.movieListItem");
 
+  const navigate = useNavigate();
+
   const renderPoster = () =>
     posterPath ? (
       <Image
@@ -53,6 +57,11 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
 
   const renderRating = () =>
     `${Math.round(voteAverage * 10) / 10} - ${voteCount}`;
+
+  const navigateToDirectorPage = useCallback(
+    (directorId: number) => navigate(routes.director(directorId.toString())),
+    [navigate]
+  );
 
   return (
     <div
@@ -80,7 +89,11 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
         {credits && (
           <div className={styles.directors}>
             {MovieCreditsTools.getDirectors(credits).map((director) => (
-              <Button key={director.id} label={director.name} />
+              <Button
+                key={director.id}
+                label={director.name}
+                onClick={() => navigateToDirectorPage(director.id)}
+              />
             ))}
           </div>
         )}

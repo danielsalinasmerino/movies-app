@@ -1,0 +1,18 @@
+.page {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  padding: 24px 5vw;
+  background-color: var(--dark-blue-tint-2);
+}
+
+.list {
+  width: 720px;
+}
+
+.showMore {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
