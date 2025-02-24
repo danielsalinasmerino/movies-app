@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import React, { ChangeEvent, useMemo, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 import Loader from "@/components/loader/loader";
 import { ENTER } from "@/constants";
 import { routes } from "@/routes";
 import { useI18Translation } from "@/utils/i18next";
-import { useNavigate, useRouteId } from "@/utils/navigation";
+import { useCurrentPath, useNavigate, useRouteId } from "@/utils/navigation";
 import { useAppSelector } from "@/utils/react-redux";
 
 import styles from "./header.module.css";
@@ -22,11 +22,22 @@ const Header = () => {
 
   const translate = useI18Translation("component.header");
 
+  const currentPath = useCurrentPath();
+
   const navigate = useNavigate();
 
   const routeId = useRouteId();
 
-  const [searchValue, setSearchValue] = useState(routeId);
+  const isSearchPage = useMemo(
+    () => currentPath.includes("search"),
+    [currentPath]
+  );
+
+  const [searchValue, setSearchValue] = useState(isSearchPage ? routeId : "");
+
+  useEffect(() => {
+    if (!isSearchPage) setSearchValue("");
+  }, [isSearchPage]);
 
   const loaderContainerStyle = useMemo(
     () => ({ width: LOADER_SIZE, opacity: isLoadingMoviesSearch ? 1 : 0 }),
