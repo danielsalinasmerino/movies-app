@@ -1,5 +1,6 @@
 import { Person } from "@/context/persons/domain";
 
 export interface PersonsRepository {
-  getDetails: (person_id: number) => Promise<Person>;
+  getDetails: (personId: number) => Promise<Person>;
+  getMovieCredits: (personId: number) => Promise<void>;
 }
