@@ -4,7 +4,6 @@ export interface Movie {
   genreIds: number[];
   id: number;
   originalLanguage: string;
-  originalCountryCode: string;
   originalTitle: string;
   overview: string;
   popularity: number;
@@ -14,7 +13,8 @@ export interface Movie {
   video: boolean;
   voteAverage: number;
   voteCount: number;
-  releaseYear: number;
+  releaseYear?: number;
+  originalCountryCode?: string;
 }
 
 export const Movies = {

@@ -2,12 +2,12 @@ import { Gender, Person, Persons } from "@/context/persons/domain";
 
 const mapGender = (data: number): Gender => {
   const genderMap: Record<number, Gender> = {
-    1: Gender.FEMALE,
-    2: Gender.MALE,
-    3: Gender.NON_BINARY,
+    1: Gender.Female,
+    2: Gender.Male,
+    3: Gender.NonBinary,
   };
 
-  return genderMap[data] ?? Gender.NOT_SPECIFIED;
+  return genderMap[data] ?? Gender.NotSpecified;
 };
 
 // TODO: Do not use any
