@@ -1,7 +1,11 @@
-import { Person, PersonsRepository } from "@/context/persons/domain";
+import {
+  Person,
+  PersonMoviesCredits,
+  PersonsRepository,
+} from "@/context/persons/domain";
 import { axiosTMDBClient, handleAxiosError } from "@/utils/axios";
 
-import { mapPerson } from "./mappers";
+import { mapPerson, mapPersonMoviesCredits } from "./mappers";
 
 export const PersonsRestRepository: PersonsRepository = {
   getDetails: async (personId: number): Promise<Person> => {
@@ -14,14 +18,13 @@ export const PersonsRestRepository: PersonsRepository = {
       throw new Error("Unable to fetch person details");
     }
   },
-  getMovieCredits: async (personId: number): Promise<void> => {
+  getMoviesCredits: async (personId: number): Promise<PersonMoviesCredits> => {
     try {
       const { data } = await axiosTMDBClient.get(
         `/person/${personId}/movie_credits`
       );
 
-      // TODO: Map this
-      console.log(data);
+      return mapPersonMoviesCredits(data);
     } catch (error) {
       handleAxiosError(
         error,

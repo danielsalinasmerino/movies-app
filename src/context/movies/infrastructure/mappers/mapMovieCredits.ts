@@ -4,6 +4,7 @@ import { CastMember, CrewMember } from "@/context/shared/domain";
 
 // TODO: This to proper file
 // TODO: Add CastMembers
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapCastMember = (data: any): CastMember => ({
   ...mapPerson(data),
   castId: data.cast_id ?? 0,
@@ -14,6 +15,7 @@ const mapCastMember = (data: any): CastMember => ({
 
 // TODO: This to proper file
 // TODO: Add CrewMembers
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapCrewMember = (data: any): CrewMember => ({
   ...mapPerson(data),
   creditId: data.credit_id || "",

@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 
 import { PersonsRestRepository } from "@/context/persons/infrastructure/persons-rest-repository";
 
-interface GetPersonMovieCreditsUseCaseParams {
+interface GetPersonMoviesCreditsUseCaseParams {
   personId: number;
 }
 
 // TODO: Assert better this useCase
-export function useGetPersonMovieCredits({
+export function useGetPersonMoviesCredits({
   personId,
-}: GetPersonMovieCreditsUseCaseParams) {
+}: GetPersonMoviesCreditsUseCaseParams) {
   const { data, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: ["getPersonMovieCreditsQuery", { personId }],
-    queryFn: () => PersonsRestRepository.getMovieCredits(personId),
+    queryFn: () => PersonsRestRepository.getMoviesCredits(personId),
     enabled: !!personId,
   });
 
