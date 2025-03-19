@@ -6,7 +6,6 @@ interface GetPersonMoviesCreditsUseCaseParams {
   personId: number;
 }
 
-// TODO: Assert better this useCase
 export function useGetPersonMoviesCredits({
   personId,
 }: GetPersonMoviesCreditsUseCaseParams) {
