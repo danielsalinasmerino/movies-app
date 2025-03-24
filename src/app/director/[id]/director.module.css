@@ -16,3 +16,92 @@
   justify-content: center;
   padding: 16px;
 }
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profileImage {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.department {
+  color: #bbb;
+  font-size: 16px;
+}
+
+.details {
+  font-size: 14px;
+  color: #888;
+}
+
+.biography {
+  margin-top: 20px;
+}
+
+.biography h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.biography p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.filmography {
+  margin-top: 20px;
+}
+
+.filmography h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.movieCard {
+  background-color: #292929;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  color: #eee;
+}
+
+.noMovies {
+  font-size: 14px;
+  color: #aaa;
+}

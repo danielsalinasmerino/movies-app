@@ -22,6 +22,7 @@ interface MovieListItemProps {
   credits?: MovieCredits;
 }
 
+// TODO: Move this to a cool TMDB_Image component
 const BASE_IMAGES_TMDB_URL = "https://image.tmdb.org/t/p/w500";
 
 const MovieListItem: React.FC<MovieListItemProps> = ({
