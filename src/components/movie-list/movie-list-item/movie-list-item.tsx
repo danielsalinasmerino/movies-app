@@ -1,8 +1,8 @@
-import Image from "next/image";
 import React, { useCallback } from "react";
 import "flag-icons/css/flag-icons.min.css";
 
 import Button from "@/components/button/button";
+import Image from "@/components/image/image";
 import { MovieCredits, MovieCreditsTools } from "@/context/movies/domain";
 import { routes } from "@/routes";
 import { useI18Translation } from "@/utils/i18next";
@@ -22,9 +22,6 @@ interface MovieListItemProps {
   credits?: MovieCredits;
 }
 
-// TODO: Move this to a cool TMDB_Image component
-const BASE_IMAGES_TMDB_URL = "https://image.tmdb.org/t/p/w500";
-
 const MovieListItem: React.FC<MovieListItemProps> = ({
   id,
   title,
@@ -43,7 +40,8 @@ const MovieListItem: React.FC<MovieListItemProps> = ({
   const renderPoster = () =>
     posterPath ? (
       <Image
-        src={`${BASE_IMAGES_TMDB_URL}${posterPath}`}
+        baseImageUrl={"TMDB"}
+        src={posterPath}
         alt={`${title} Poster`}
         width={100}
         height={150}

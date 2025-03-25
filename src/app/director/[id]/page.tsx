@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo } from "react";
 
+import Image from "@/components/image/image";
 import {
   useGetPersonDetails,
   useGetPersonMoviesCredits,
@@ -41,10 +41,8 @@ export default function Director() {
       {/* Header Section */}
       <div className={styles.header}>
         <Image
-          src={
-            `https://image.tmdb.org/t/p/w500${personDetails.profilePath}` ||
-            "/default-profile.jpg"
-          }
+          baseImageUrl={"TMDB"}
+          src={personDetails.profilePath}
           alt={personDetails.name}
           width={120}
           height={120}

@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 
+import Image from "@/components/image/image";
 import Loader from "@/components/loader/loader";
 import { ENTER } from "@/constants";
 import { routes } from "@/routes";
