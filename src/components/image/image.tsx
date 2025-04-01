@@ -10,8 +10,11 @@ type ImageProps = NextImageProps & {
 const Image = ({ baseImageUrl, src, ...props }: ImageProps) => {
   if (!src) return null;
 
+  const isStringSrc = typeof src === "string";
+  const { isFullUrl: srcIsFullUrl } = isFullUrl(isStringSrc ? src : "");
+
   const finalSrc =
-    typeof src === "string" && baseImageUrl && !isFullUrl(src)
+    isStringSrc && baseImageUrl && !srcIsFullUrl
       ? `${BaseImagesUrlsEnum[baseImageUrl] ?? ""}${src}`
       : src;
 
