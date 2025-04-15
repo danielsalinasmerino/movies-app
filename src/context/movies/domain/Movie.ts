@@ -19,4 +19,9 @@ export interface Movie {
 
 export const Movies = {
   create: (param: Partial<Movie>): Movie => param as Movie,
+  sortByPopularity: (movies: Movie[]): Movie[] => {
+    return [...movies].sort(
+      (movieA, movieB) => movieB.popularity - movieA.popularity
+    );
+  },
 };

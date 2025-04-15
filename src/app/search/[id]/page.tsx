@@ -2,6 +2,7 @@
 
 import Button from "@/components/button/button";
 import MovieList from "@/components/movie-list/movie-list";
+import { Movies } from "@/context/movies/domain";
 import { useDebouncedValue } from "@/utils/hooks";
 import { useI18Translation } from "@/utils/i18next";
 import { useRouteId } from "@/utils/navigation";
@@ -34,7 +35,10 @@ export default function Search() {
       )}
 
       <div className={styles.list}>
-        <MovieList movies={cachedMovies} query={query} />
+        <MovieList
+          movies={Movies.sortByPopularity(cachedMovies)}
+          query={query}
+        />
         {showMoreResults && (
           <div className={styles.showMore}>
             <Button
