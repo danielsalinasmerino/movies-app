@@ -20,8 +20,8 @@ export type PersonMoviesCredits = {
 };
 
 export const PersonMoviesCreditsTools = {
-  create: (param: Partial<PersonMoviesCredits>): PersonMoviesCredits =>
-    param as PersonMoviesCredits,
+  create: (params: Partial<PersonMoviesCredits>): PersonMoviesCredits =>
+    params as PersonMoviesCredits,
   getMoviesWhereIsCrewByJob: (
     personMoviesCredits: PersonMoviesCredits,
     job: Job
@@ -29,4 +29,10 @@ export const PersonMoviesCreditsTools = {
     personMoviesCredits.moviesWhereIsCrew.filter(
       (movieWhereIsCrew) => movieWhereIsCrew.job === job
     ),
+  getAllCrewJobs: (personMoviesCredits: PersonMoviesCredits) => {
+    const allJobs = personMoviesCredits.moviesWhereIsCrew.map(
+      (crewCredit) => crewCredit.job
+    );
+    return Array.from(new Set(allJobs));
+  },
 };
